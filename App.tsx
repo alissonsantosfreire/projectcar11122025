@@ -322,13 +322,13 @@ const VehicleGallery = () => {
   const [lightboxImage, setLightboxImage] = useState(0);
 
   const carImages = [
-    "/ee2csf7grsi7rvmrffm9.webp",
-    "/fxcxozguryyxqjppwmsr.webp",
-    "/hll2nkfkz7hcfhilf9rt.webp",
-    "/kcj1q1dcenqh3j5vzwjc.webp",
-    "/on5pjkryj6nzkkj7qr83.webp",
-    "/ratcld0vzc8gpcuhuz28.webp",
-    "/vqtyucxhoxtyfgmzcbfa.webp"
+    "/20251203_165049.webp",
+    "/20251203_165055.webp",
+    "/20251203_165106.webp",
+    "/20251203_165111.webp",
+    "/20251203_165115.webp",
+    "/20251203_165137.webp",
+    "/20251203_165146.webp"
   ];
 
   useEffect(() => {

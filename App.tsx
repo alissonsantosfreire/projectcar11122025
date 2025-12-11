@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, MapPin, Clock, ShieldCheck, Star, ChevronRight, Car, User, Instagram } from 'lucide-react';
+import { Menu, X, Phone, MapPin, Clock, ShieldCheck, Star, ChevronRight, Car, User, Instagram, ChevronLeft } from 'lucide-react';
 
 // --- Components ---
 
@@ -30,6 +30,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Diferenciais', href: '#diferenciais' },
     { name: 'Motorista', href: '#motorista' },
+    { name: 'Veículo', href: '#veiculo' },
     { name: 'Áreas de atendimento', href: '#areas' },
     { name: 'Localização', href: '#localizacao' },
   ];
@@ -315,6 +316,241 @@ const AboutDriver = () => {
   );
 };
 
+const VehicleGallery = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState(0);
+
+  const carImages = [
+    "/ee2csf7grsi7rvmrffm9.webp",
+    "/fxcxozguryyxqjppwmsr.webp",
+    "/hll2nkfkz7hcfhilf9rt.webp",
+    "/kcj1q1dcenqh3j5vzwjc.webp",
+    "/on5pjkryj6nzkkj7qr83.webp",
+    "/ratcld0vzc8gpcuhuz28.webp",
+    "/vqtyucxhoxtyfgmzcbfa.webp"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % carImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const nextImage = () => {
+    setCurrentImage((prev) => (prev + 1) % carImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImage((prev) => (prev - 1 + carImages.length) % carImages.length);
+  };
+
+  const openLightbox = (index: number) => {
+    setLightboxImage(index);
+    setIsLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setIsLightboxOpen(false);
+  };
+
+  const nextLightboxImage = () => {
+    setLightboxImage((prev) => (prev + 1) % carImages.length);
+  };
+
+  const prevLightboxImage = () => {
+    setLightboxImage((prev) => (prev - 1 + carImages.length) % carImages.length);
+  };
+
+  return (
+    <section id="veiculo" className="py-16 md:py-24 bg-gradient-to-br from-slate-50 to-white">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Nosso Veículo</h2>
+          <div className="h-1 w-20 bg-souto-500 rounded-full mx-auto mb-6"></div>
+          <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+            Conheça o veículo que vai garantir o máximo conforto e segurança na sua viagem
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Galeria de Fotos */}
+          <div className="relative">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl group">
+              <img
+                src={carImages[currentImage]}
+                alt={`Chevrolet Onix 2024 - Foto ${currentImage + 1}`}
+                className="w-full h-full object-cover cursor-pointer transition-transform duration-500 group-hover:scale-105"
+                onClick={() => openLightbox(currentImage)}
+                loading="lazy"
+              />
+              
+              {/* Botões de Navegação */}
+              <button
+                onClick={prevImage}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-900 p-3 rounded-full shadow-lg transition-all hover:scale-110"
+                aria-label="Foto anterior"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-900 p-3 rounded-full shadow-lg transition-all hover:scale-110"
+                aria-label="Próxima foto"
+              >
+                <ChevronRight size={24} />
+              </button>
+
+              {/* Indicadores */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {carImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImage(index)}
+                    className={`h-2 rounded-full transition-all ${
+                      index === currentImage ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/75'
+                    }`}
+                    aria-label={`Ir para foto ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Miniaturas */}
+            <div className="grid grid-cols-7 gap-2 mt-4">
+              {carImages.map((img, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImage(index)}
+                  className={`aspect-square rounded-lg overflow-hidden transition-all ${
+                    index === currentImage ? 'ring-4 ring-souto-500 scale-95' : 'opacity-60 hover:opacity-100'
+                  }`}
+                >
+                  <img
+                    src={img}
+                    alt={`Miniatura ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Informações do Veículo */}
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-3xl font-bold text-slate-900 mb-2">Chevrolet Onix 2024</h3>
+              <p className="text-souto-600 font-semibold text-lg">Modelo mais recente com baixa quilometragem</p>
+            </div>
+
+            <p className="text-slate-600 text-lg leading-relaxed">
+              Viaje com total conforto e segurança em um veículo seminovo, equipado com os melhores recursos para garantir uma experiência premium.
+            </p>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 bg-souto-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-souto-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-bold text-slate-900">Ar-Condicionado</h4>
+                </div>
+                <p className="text-slate-600 text-sm">Climatização perfeita em todas as estações</p>
+              </div>
+
+              <div className="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 bg-souto-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-souto-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-bold text-slate-900">Bancos Confortáveis</h4>
+                </div>
+                <p className="text-slate-600 text-sm">Assentos ergonômicos para longas viagens</p>
+              </div>
+
+              <div className="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 bg-souto-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-souto-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                    </svg>
+                  </div>
+                  <h4 className="font-bold text-slate-900">Espaço Interno</h4>
+                </div>
+                <p className="text-slate-600 text-sm">Amplo espaço para até 4 passageiros</p>
+              </div>
+
+              <div className="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 bg-souto-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-souto-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                  </div>
+                  <h4 className="font-bold text-slate-900">Porta-Malas Amplo</h4>
+                </div>
+                <p className="text-slate-600 text-sm">Espaço generoso para todas as bagagens</p>
+              </div>
+            </div>
+
+            <div className="pt-4">
+              <a href="#contato" className="bg-souto-600 hover:bg-souto-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-colors inline-flex items-center gap-2 shadow-lg hover:shadow-xl">
+                Agendar Viagem <ChevronRight size={20} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Lightbox */}
+      {isLightboxOpen && (
+        <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4" onClick={closeLightbox}>
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 text-white hover:text-souto-400 p-2 transition-colors z-50"
+            aria-label="Fechar"
+          >
+            <X size={32} />
+          </button>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); prevLightboxImage(); }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-souto-400 p-3 transition-colors z-50"
+            aria-label="Foto anterior"
+          >
+            <ChevronLeft size={48} />
+          </button>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); nextLightboxImage(); }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-souto-400 p-3 transition-colors z-50"
+            aria-label="Próxima foto"
+          >
+            <ChevronRight size={48} />
+          </button>
+
+          <img
+            src={carImages[lightboxImage]}
+            alt={`Chevrolet Onix 2024 - Foto ${lightboxImage + 1}`}
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-lg font-semibold">
+            {lightboxImage + 1} / {carImages.length}
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};
+
 const Locations = () => {
   const cities = [
     { name: "Juazeiro do Norte", image: "/Juazeiro do Norte.webp" },
@@ -492,6 +728,7 @@ const App = () => {
         <Hero />
         <Features />
         <AboutDriver />
+        <VehicleGallery />
         <Locations />
         <LocationMap />
         <Contact />

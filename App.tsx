@@ -38,7 +38,7 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'}`} role="navigation" aria-label="Menu principal">
       <div className="container mx-auto px-6 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3 group" aria-label="Souto Táxi - Página inicial">
-          <img src="/projectcar11122025/Logo do topo do site.svg" alt="Logotipo Souto Táxi - Transporte Executivo" className="h-12 md:h-14 transition-transform group-hover:scale-105" />
+          <img src="/Logo do topo do site.svg" alt="Logotipo Souto Táxi - Transporte Executivo" className="h-12 md:h-14 transition-transform group-hover:scale-105" />
         </a>
 
         {/* Desktop Nav */}
@@ -169,7 +169,7 @@ const Hero = () => {
         <div className="relative animate-fade-in-right order-first md:order-last">
           <div className="relative z-10">
             <img 
-              src="/projectcar11122025/Foto 1.webp" 
+              src="/Foto 1.webp" 
               alt="Veículo Souto Táxi - Sedan confortável com ar-condicionado para viagens em Juazeiro do Norte" 
               className="rounded-2xl md:rounded-3xl shadow-2xl w-full object-cover h-[300px] md:h-[500px]"
               style={{ objectPosition: 'center' }}
@@ -259,7 +259,7 @@ const AboutDriver = () => {
           <div className="lg:w-1/2 relative">
              <div className="relative">
                 <img 
-                  src="/projectcar11122025/Foto 2.webp" 
+                  src="/Foto 2.webp" 
                   alt="Francisco Souto - Motorista profissional com direção defensiva certificada e experiência em viagens interestaduais" 
                   className="rounded-2xl shadow-2xl border-4 border-slate-700/50 w-full max-w-md mx-auto transform rotate-2 hover:rotate-0 transition-transform duration-500"
                   loading="lazy"
@@ -317,9 +317,9 @@ const AboutDriver = () => {
 
 const Locations = () => {
   const cities = [
-    { name: "Juazeiro do Norte", image: "/projectcar11122025/Juazeiro do Norte.webp" },
-    { name: "Crato", image: "/projectcar11122025/Crato.webp" },
-    { name: "Barbalha", image: "/projectcar11122025/Barbalha.webp" },
+    { name: "Juazeiro do Norte", image: "/Juazeiro do Norte.webp" },
+    { name: "Crato", image: "/Crato.webp" },
+    { name: "Barbalha", image: "/Barbalha.webp" },
   ];
 
   return (
@@ -464,7 +464,7 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-8 md:relative">
           <div className="flex items-center gap-2 md:absolute md:left-0">
-            <img src="/projectcar11122025/Logo do fundo do site.svg" alt="Logotipo Souto Táxi" className="h-8 md:h-10" />
+            <img src="/Logo do fundo do site.svg" alt="Logotipo Souto Táxi" className="h-8 md:h-10" />
           </div>
           
           <nav className="flex gap-4 md:gap-6 text-xs md:text-sm font-medium" aria-label="Menu rodapé">
